@@ -161,7 +161,7 @@ footer .pixel { font: .6rem/1.8 var(--pixel-font); color: var(--text); }
 <a class="skip-link" href="#content">Skip to participant guide</a>
 <div class="wrap">
 <nav class="topnav" aria-label="Guide sections"><ul>
-<li><a href="#start">Get started</a></li><li><a href="#prepare">Prepare</a></li><li><a href="#tracks">Tracks</a></li><li><a href="#submit">Submit</a></li><li><a href="#faq">FAQ</a></li><li><a href="showcase/">Showcase</a></li><li><a class="nav-cta" href="${esc(event.links.home)}">Event site ↗</a></li>
+<li><a href="#start">Get started</a></li><li><a href="#prepare">Prepare</a></li><li><a href="#tracks">Tracks</a></li><li><a href="#submit">Submit</a></li><li><a href="submit/">itch.io how-to</a></li><li><a href="#faq">FAQ</a></li><li><a href="showcase/">Showcase</a></li><li><a class="nav-cta" href="${esc(event.links.home)}">Event site ↗</a></li>
 </ul></nav>
 <main id="content">
 ${event.status !== 'ready' ? '<aside class="notice"><strong>Organizer draft</strong> · Event settings and missing links still need confirmation.</aside>' : ''}
@@ -185,7 +185,7 @@ ${link('results', 'Projects & results', 'Explore what the community built this w
 <section aria-labelledby="prepare"><h2 id="prepare">Before you arrive</h2><ol><li>Create GitHub and itch.io accounts and choose your AI tool.</li><li>Create your own repository from the starter, open it in Codespaces, and run <code>npm run dev</code>.</li><li>Check your game opens and your AI login works. Check remaining cloud/AI allowances.</li><li>Bring your charger. Native-engine users should install their editor on their own laptop.</li></ol>
 <div class="resources"><a href="showcase/">See what people have built with Claude: the showcase</a><a href="${esc(event.links.starterRepository)}/blob/main/docs/threejs.md">Try and edit the included Three.js 3D demo ↗</a><a href="${esc(event.links.starterRepository)}/blob/main/docs/tools.md">Installed tools &amp; game resources ↗</a><a href="${esc(event.links.starterRepository)}/blob/main/docs/editors.md">Connect desktop VS Code, SSH editors, or T3 Code ↗</a></div></section>
 <section aria-labelledby="tracks"><h2 id="tracks">Pick a track</h2><div class="grid tracks">${event.tracks.map(t => `<article class="card track-card ${trackClass[t.id] ?? ''}"><h3>${esc(t.name)}</h3><p>${esc(t.description)}</p>${t.judged ? `<p class="criteria">${t.criteria.map(c => esc(c.name)).join(' · ')}. Each criterion has equal weight.</p>${t.jamUrl ? `<p class="track-link"><a class="btn" href="${esc(t.jamUrl)}">Join / submit to ${esc(t.name)} ↗</a></p>` : '<p class="criteria">Jam link coming soon.</p>'}` : ''}</article>`).join('')}</div></section>
-<section aria-labelledby="submit"><h2 id="submit">Submit your project</h2><ol><li>Save, commit, and push your final code. Record the submitted commit.</li><li>Run <code>npm run package</code> for the web starter and download <code>artifacts/game.zip</code>.</li><li>Create an itch.io project, upload the build, and test it as a visitor. Native games upload the appropriate platform build.</li><li>Use <strong>Submit your project</strong> on the jam page and complete the submission fields. Uploading alone does not enter the jam.</li></ol>
+<section aria-labelledby="submit"><h2 id="submit">Submit your project</h2><ol><li>Save, commit, and push your final code. Record the submitted commit.</li><li>Run <code>npm run package</code> for the web starter and download <code>artifacts/game.zip</code>.</li><li>Create an itch.io project, upload the build, and test it as a visitor. Native games upload the appropriate platform build.</li><li>Use <strong>Submit your project</strong> on the jam page and complete the submission fields. Uploading alone does not enter the jam.</li></ol><p><a class="btn" href="submit/">Step-by-step itch.io submission guide, with screenshots</a></p>
 <p class="muted">Your Codespaces preview is temporary; use the submitted build or a durable hosted demo for judging.</p></section>
 <section aria-labelledby="judging"><h2 id="judging">Judging</h2><p>Freeplay and Wizards and Lizards each have five criteria scored 1–5 with equal weight. GTA Cda is a community build and is not judged.</p>
 <ul class="judging-times"><li><strong>Judging closes</strong>${esc(date('judgingEndsAt'))}</li><li><strong>Awards</strong>${esc(date('awardsAt'))}<br><span class="muted">${esc(event.sundayVenue)}</span></li></ul></section>
@@ -207,4 +207,7 @@ await writeFile('dist-hub/index.html', html);
 // The showcase is a static folder. Publish it next to the guide with its own copy of the pixel font.
 await cp('showcase', 'dist-hub/showcase', { recursive: true });
 await cp('src/assets/fonts/press-start-2p-latin.woff2', 'dist-hub/showcase/press-start-2p-latin.woff2');
+// The itch.io submission how-to is also a static folder.
+await cp('submit', 'dist-hub/submit', { recursive: true });
+await cp('src/assets/fonts/press-start-2p-latin.woff2', 'dist-hub/submit/press-start-2p-latin.woff2');
 console.log(`Built dist-hub/index.html (${event.status}). Publish this under the event site after event:check passes.`);

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0f2a">
+<meta name="description" content="How to put your vibeCDA game on itch.io and enter it in the jam, in five steps.">
+<title>Submit your game on itch.io · vibeCDA 2026</title>
+<style>
+@font-face { font-family: "Press Start 2P"; src: url("./press-start-2p-latin.woff2") format("woff2"), url("../src/assets/fonts/press-start-2p-latin.woff2") format("woff2"); font-display: swap; }
+:root { color-scheme: dark; --bg: #0b0f2a; --panel: #12183a; --border: #2a3570; --cyan: #3de0ff; --gold: #f0a830; --pink: #ff2fa0; --text: #e8ecff; --muted: #a8b0d8; background: var(--bg); }
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif; font-size: 1.05rem; line-height: 1.65; color: var(--text);
+  background: radial-gradient(at 20% 0%, #1a1450 0%, transparent 50%), linear-gradient(#060918, #0b0f2a 40%, #0d1235); background-attachment: fixed; }
+.wrap { max-width: 820px; margin: auto; padding: 1.5rem 1.1rem 4rem; }
+a { color: var(--cyan); text-underline-offset: 3px; }
+a:hover { color: #fff; }
+a:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+.back { font-size: .95rem; }
+h1, h2 { font-family: "Press Start 2P", monospace; line-height: 1.5; font-weight: 400; }
+h1 { font-size: clamp(1.15rem, 4vw, 1.7rem); margin: 1.5rem 0 .6rem; color: var(--gold); }
+h2 { font-size: clamp(.8rem, 2.6vw, 1rem); margin: 2.6rem 0 .8rem; color: var(--cyan); }
+h2 span { color: var(--gold); }
+.lede { color: var(--muted); font-size: 1.12rem; }
+.deadline { background: var(--panel); border: 2px solid var(--gold); border-radius: 10px; padding: .9rem 1.1rem; margin: 1.4rem 0; }
+.deadline strong { color: var(--gold); }
+ol, ul { padding-left: 1.3rem; }
+li { margin: .35rem 0; }
+code { background: #060918; border: 1px solid var(--border); border-radius: 5px; padding: .05rem .35rem; font-size: .93em; }
+pre { background: #060918; border: 1px solid var(--border); border-radius: 8px; padding: .8rem 1rem; overflow-x: auto; }
+pre code { border: 0; padding: 0; }
+figure { margin: 1rem 0 1.4rem; }
+figure img { display: block; width: 100%; height: auto; border-radius: 8px; border: 2px solid var(--border); }
+figcaption { color: var(--muted); font-size: .9rem; margin-top: .4rem; }
+.tip { border-left: 4px solid var(--pink); background: var(--panel); padding: .7rem 1rem; border-radius: 0 8px 8px 0; margin: 1rem 0; }
+.btns { display: flex; flex-wrap: wrap; gap: .6rem; margin: .8rem 0; }
+.btn { display: inline-block; padding: .55rem .95rem; background: var(--panel); border: 2px solid var(--cyan); border-radius: 8px; text-decoration: none; font-weight: 600; }
+.check li::marker { content: "☐  "; color: var(--gold); }
+</style>
+</head>
+<body>
+<main class="wrap">
+<p class="back"><a href="../">← Participant guide</a></p>
+<h1>Submit your game on itch.io</h1>
+<p class="lede">Five steps from finished game to jam entry. Allow 15 minutes, and don't leave it for the last minute.</p>
+<div class="deadline">Submissions close <strong>Sunday, November 15, 2026 at 12:00 noon Pacific</strong>. Late uploads don't count as jam entries.</div>
+
+<h2><span>1.</span> Build your game ZIP</h2>
+<p>In the terminal of your project (Codespace or laptop), run:</p>
+<pre><code>npm run package</code></pre>
+<p>When it finishes you'll have <code>artifacts/game.zip</code>. In Codespaces, right-click <strong>artifacts → game.zip → Download</strong>. <strong>Don't unzip it.</strong> Upload this file, not the GitHub "Download ZIP" of your source code.</p>
+<p class="tip">Not using the starter? Any browser game works if <code>index.html</code> is at the top level of the ZIP. Native games (Godot, Unity, etc.) can upload Windows/Mac/Linux builds instead.</p>
+
+<h2><span>2.</span> Create an itch.io project</h2>
+<p>Log in to <a href="https://itch.io/login">itch.io</a> (or <a href="https://itch.io/register">register</a>), then click <strong>Upload Game</strong> in the top bar. Your dashboard's <strong>Create new project</strong> button does the same thing.</p>
+<figure><img src="itch-upload-game.png" width="1280" height="250" alt="The itch.io top bar with the Upload Game link highlighted."><figcaption>"Upload Game" is in the top bar on every itch.io page.</figcaption></figure>
+<p>On the form, fill in:</p>
+<ul>
+  <li><strong>Title:</strong> your game's name.</li>
+  <li><strong>Kind of project:</strong> <strong>HTML</strong>. This setting is what makes the game playable in the browser.</li>
+  <li><strong>Uploads:</strong> click <strong>Upload files</strong>, pick <code>game.zip</code>, then tick <strong>This file will be played in the browser</strong>.</li>
+  <li><strong>Embed options:</strong> set the size to <strong>960 × 720</strong> and turn on the fullscreen button.</li>
+  <li><strong>Details:</strong> a one-line pitch, the controls, team members, credits for any assets you didn't make, and how you used AI.</li>
+  <li><strong>Cover image:</strong> add one, plus a screenshot or two. A screenshot of your game is fine.</li>
+</ul>
+<p>Click <strong>Save &amp; view page</strong>.</p>
+
+<h2><span>3.</span> Test it and make it public</h2>
+<ol>
+  <li>On your game page, click <strong>Run game</strong> and actually play it. Click inside the game once so it gets keyboard input and sound.</li>
+  <li>Back in <strong>Edit game</strong>, set <strong>Visibility &amp; access</strong> to <strong>Public</strong> and save.</li>
+  <li>Open the game's link in a private/incognito window to see it the way judges will.</li>
+</ol>
+<p class="tip"><strong>Blank screen or only a download link?</strong> Check that Kind of project is HTML, the "played in the browser" box is ticked, and you uploaded <code>artifacts/game.zip</code>, not your source code.</p>
+
+<h2><span>4.</span> Enter the jam (a separate step!)</h2>
+<p>Uploading a game does <strong>not</strong> enter it in the jam. Open your track's jam page:</p>
+<div class="btns"><a class="btn" href="https://itch.io/jam/vibecda-2026-freeplay">Freeplay jam ↗</a><a class="btn" href="https://itch.io/jam/vibecda-2026-wizards-and-lizards">Wizards and Lizards jam ↗</a></div>
+<p>Click <strong>Join jam</strong>. Once you've joined, the button changes to <strong>Submit your project</strong>. Click it, pick the game you just created, answer the questions, and submit.</p>
+<figure><img src="itch-join-jam.png" width="960" height="340" alt="The vibeCDA 2026 Freeplay jam page on itch.io with the Join jam button highlighted."><figcaption>Join the jam first. After you join, this spot shows "Submit your project".</figcaption></figure>
+<p>Only one teammate needs to submit. List the whole team in the game's description. GTA Cda is a community build and isn't submitted through itch.io.</p>
+
+<h2><span>5.</span> Double-check</h2>
+<ul class="check">
+  <li>Your game appears in the jam's <strong>Submissions</strong> tab, and the entry count went up.</li>
+  <li>It plays in a signed-out browser window.</li>
+  <li>Controls, credits, and AI use are listed on the page.</li>
+  <li>Your final code is committed and pushed to GitHub.</li>
+</ul>
+<p>Stuck? Ask a mentor in the room, or post in <a href="https://github.com/VibeCdA/vibecda-starter/discussions">community help</a>. For even more detail, see the <a href="https://github.com/VibeCdA/vibecda-starter/blob/main/docs/beginners.md#8-upload-your-game-to-itchio">full beginner walkthrough</a>.</p>
+</main>
+</body>
+</html>

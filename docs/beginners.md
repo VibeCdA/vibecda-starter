@@ -283,6 +283,8 @@ The easiest way for friends and judges to play is usually your finished itch.io 
 
 ## 8. Upload your game to itch.io
 
+Prefer pictures? See the [one-page itch.io submission guide with screenshots](https://vibecda.github.io/vibecda-starter/submit/).
+
 ### Create the file to upload
 
 1. In the source project's terminal (Codespace or laptop), run:

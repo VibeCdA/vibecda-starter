@@ -9,6 +9,7 @@ on:
       - scripts/event-config.mjs
       - docs/beginners.md
       - showcase/**
+      - submit/**
       - .github/workflows/deploy-guide.yml
 permissions:
   contents: read

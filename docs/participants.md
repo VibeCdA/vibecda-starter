@@ -64,6 +64,8 @@ Codespace against the same team repository; coordinate branches and merges.
 
 ## Publish a browser game to itch.io
 
+Short on time? Follow the [itch.io submission guide with screenshots](https://vibecda.github.io/vibecda-starter/submit/).
+
 Choose your track: [Freeplay](https://itch.io/jam/vibecda-2026-freeplay) or
 [Wizards and Lizards](https://itch.io/jam/vibecda-2026-wizards-and-lizards).
 Submit by Sunday November 15, 2026 at noon Pacific. GTA Cda is unjudged.
