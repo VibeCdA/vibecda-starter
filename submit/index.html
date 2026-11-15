@@ -35,6 +35,11 @@ figcaption { color: var(--muted); font-size: .9rem; margin-top: .4rem; }
 .tip { border-left: 4px solid var(--pink); background: var(--panel); padding: .7rem 1rem; border-radius: 0 8px 8px 0; margin: 1rem 0; }
 .btns { display: flex; flex-wrap: wrap; gap: .6rem; margin: .8rem 0; }
 .btn { display: inline-block; padding: .55rem .95rem; background: var(--panel); border: 2px solid var(--cyan); border-radius: 8px; text-decoration: none; font-weight: 600; }
+.wrap h3 { font-size: 1.1rem; margin: 1.6rem 0 .4rem; color: var(--gold); }
+.prompt { position: relative; }
+.prompt pre { max-height: 22rem; padding-top: 2.6rem; white-space: pre-wrap; }
+.copy { position: absolute; top: .5rem; right: .5rem; font: inherit; font-size: .9rem; font-weight: 600; color: var(--bg); background: var(--cyan); border: 0; border-radius: 6px; padding: .3rem .75rem; cursor: pointer; }
+.copy:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 .check li::marker { content: "☐  "; color: var(--gold); }
 </style>
 </head>
@@ -46,10 +51,40 @@ figcaption { color: var(--muted); font-size: .9rem; margin-top: .4rem; }
 <div class="deadline">Submissions close <strong>Sunday, November 15, 2026 at 12:00 noon Pacific</strong>. Late uploads don't count as jam entries.</div>
 
 <h2><span>1.</span> Build your game ZIP</h2>
-<p>In the terminal of your project (Codespace or laptop), run:</p>
+<p>Which one is you?</p>
+
+<h3>Using the vibeCDA starter</h3>
+<p>This applies if you made your repo from the vibeCDA starter template (the prepared Codespace or a local copy of it). In your project's terminal, run:</p>
 <pre><code>npm run package</code></pre>
 <p>When it finishes you'll have <code>artifacts/game.zip</code>. In Codespaces, right-click <strong>artifacts → game.zip → Download</strong>. <strong>Don't unzip it.</strong> Upload this file, not the GitHub "Download ZIP" of your source code.</p>
-<p class="tip">Not using the starter? Any browser game works if <code>index.html</code> is at the top level of the ZIP. Native games (Godot, Unity, etc.) can upload Windows/Mac/Linux builds instead.</p>
+
+<h3>Built your own way</h3>
+<p>This applies to any other setup: your own web stack, Godot, Unity, PICO-8, and so on. itch.io needs one of these:</p>
+<ul>
+  <li><strong>Browser game:</strong> a ZIP with <code>index.html</code> at the top level (not inside a folder) and relative asset paths, so it runs inside itch's embedded frame.</li>
+  <li><strong>Downloadable game:</strong> a separate ZIP per platform (Windows, Mac, Linux) that runs without installing anything else.</li>
+</ul>
+<p>Not sure how to get there? Paste this prompt into your coding agent (Claude Code, Codex, Gemini CLI, Cursor, etc.) from your project folder:</p>
+<div class="prompt">
+<button class="copy" type="button" data-copy="agent-prompt">Copy prompt</button>
+<pre><code id="agent-prompt">Help me package this game for submission to an itch.io game jam. The deadline is close, so keep changes minimal and don't add features or refactor.
+
+1. Look at this project and tell me what engine/framework it uses and whether it can run in a web browser.
+2. If it can run in the browser (preferred, because judges can play it instantly):
+   - Produce a production web build using the project's own build/export tooling.
+   - Make sure every asset and script path is relative (no leading "/"), because itch.io serves the game from a subfolder inside an iframe.
+   - Create a ZIP where index.html is at the root of the ZIP, not inside a folder. Name it game-web.zip.
+   - Check engine-specific gotchas: Godot 4 web exports need itch.io's "SharedArrayBuffer support" option (or a single-threaded export); Unity WebGL builds should use "Decompression Fallback" or disable compression; avoid features that need a backend server.
+   - Check the ZIP against itch.io's current HTML upload limits (file count and file size) and fix anything over.
+   - Serve the extracted ZIP with a simple local static server and confirm the game loads with no console errors.
+3. If it can't run in the browser, make a build for each platform I can support (Windows/Mac/Linux), zip each one separately, and confirm it runs on this machine.
+4. Don't upload anything or log into any account. When done, tell me:
+   - the path of each ZIP and what platform it's for,
+   - which itch.io "Kind of project" to choose (HTML or Downloadable),
+   - a recommended embed size for the browser player,
+   - the game's controls, so I can paste them onto the page.</code></pre>
+</div>
+<p>Then upload the ZIP your agent gives you in step 2. For downloadable games, choose <strong>Downloadable</strong> as the kind of project and mark each file's platform.</p>
 
 <h2><span>2.</span> Create an itch.io project</h2>
 <p>Log in to <a href="https://itch.io/login">itch.io</a> (or <a href="https://itch.io/register">register</a>), then click <strong>Upload Game</strong> in the top bar. Your dashboard's <strong>Create new project</strong> button does the same thing.</p>
@@ -57,8 +92,8 @@ figcaption { color: var(--muted); font-size: .9rem; margin-top: .4rem; }
 <p>On the form, fill in:</p>
 <ul>
   <li><strong>Title:</strong> your game's name.</li>
-  <li><strong>Kind of project:</strong> <strong>HTML</strong>. This setting is what makes the game playable in the browser.</li>
-  <li><strong>Uploads:</strong> click <strong>Upload files</strong>, pick <code>game.zip</code>, then tick <strong>This file will be played in the browser</strong>.</li>
+  <li><strong>Kind of project:</strong> <strong>HTML</strong> for browser games. This setting is what makes the game playable in the browser. Use <strong>Downloadable</strong> for native builds.</li>
+  <li><strong>Uploads:</strong> click <strong>Upload files</strong>, pick your ZIP, then tick <strong>This file will be played in the browser</strong>.</li>
   <li><strong>Embed options:</strong> set the size to <strong>960 × 720</strong> and turn on the fullscreen button.</li>
   <li><strong>Details:</strong> a one-line pitch, the controls, team members, credits for any assets you didn't make, and how you used AI.</li>
   <li><strong>Cover image:</strong> add one, plus a screenshot or two. A screenshot of your game is fine.</li>
@@ -71,7 +106,7 @@ figcaption { color: var(--muted); font-size: .9rem; margin-top: .4rem; }
   <li>Back in <strong>Edit game</strong>, set <strong>Visibility &amp; access</strong> to <strong>Public</strong> and save.</li>
   <li>Open the game's link in a private/incognito window to see it the way judges will.</li>
 </ol>
-<p class="tip"><strong>Blank screen or only a download link?</strong> Check that Kind of project is HTML, the "played in the browser" box is ticked, and you uploaded <code>artifacts/game.zip</code>, not your source code.</p>
+<p class="tip"><strong>Blank screen or only a download link?</strong> Check that Kind of project is HTML, the "played in the browser" box is ticked, and the ZIP you uploaded has <code>index.html</code> at the top level. Starter users should upload <code>artifacts/game.zip</code>, not their source code.</p>
 
 <h2><span>4.</span> Enter the jam (a separate step!)</h2>
 <p>Uploading a game does <strong>not</strong> enter it in the jam. Open your track's jam page:</p>
@@ -89,5 +124,13 @@ figcaption { color: var(--muted); font-size: .9rem; margin-top: .4rem; }
 </ul>
 <p>Stuck? Ask a mentor in the room, or post in <a href="https://github.com/VibeCdA/vibecda-starter/discussions">community help</a>. For even more detail, see the <a href="https://github.com/VibeCdA/vibecda-starter/blob/main/docs/beginners.md#8-upload-your-game-to-itchio">full beginner walkthrough</a>.</p>
 </main>
+<script>
+document.querySelectorAll('[data-copy]').forEach(btn => btn.addEventListener('click', async () => {
+  const text = document.getElementById(btn.dataset.copy).textContent;
+  try { await navigator.clipboard.writeText(text); btn.textContent = 'Copied!'; }
+  catch { getSelection().selectAllChildren(document.getElementById(btn.dataset.copy)); btn.textContent = 'Press Ctrl/Cmd+C'; }
+  setTimeout(() => { btn.textContent = 'Copy prompt'; }, 2000);
+}));
+</script>
 </body>
 </html>
